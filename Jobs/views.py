@@ -5,7 +5,7 @@ from rest_framework.viewsets import ModelViewSet
 from .models import Jobs
 from .serializers import JobsSerializer
 from django.shortcuts import get_object_or_404
-from rest_framework import permissions
+from rest_framework import status
 
 
 def hello(request):
@@ -15,10 +15,8 @@ def hello(request):
 class JobsViewSet(ModelViewSet):
     serializer_class = JobsSerializer
     queryset = Jobs.objects.all()
-    permission_classes = (permissions.AllowAny,)
     
-    def create(self, request, *args, **kwargs):
-        
+    def create(self, request, *args, **kwargs):        
         return super().create(request, *args, **kwargs)
     
     def list(self, request):
@@ -32,19 +30,28 @@ class JobsViewSet(ModelViewSet):
         serializer = JobsSerializer(job)
         return Response(serializer.data)
     
-    # def update(self, request, pk=None):
-    #     queryset = Jobs.objects.all()
-    #     job = get_object_or_404(queryset, pk=pk)
-    #     job = request.data
-    #     serializer = JobsSerializer(job)
-    #     return Response(serializer.data)
-    
-    def partial_update(self, request, *args, **kwargs):
-        instance = self.queryset.get(pk=kwargs.get('pk'))
-        serializer = self.serializer_class(instance, data=request.data, partial=True)
+    def update(self, request, pk=None):
+        queryset = Jobs.objects.all()
+        job = get_object_or_404(queryset, pk=pk)
+        serializer = self.get_serializer(job, data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data)
+    
+    def partial_update(self, request, pk=None):
+        queryset = Jobs.objects.all()
+        job = get_object_or_404(queryset, pk=pk)
+        serializer = self.get_serializer(job, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+    
+    def destroy(self, request, pk=None):
+        queryset = Jobs.objects.all()
+        job = get_object_or_404(queryset, pk=pk)
+        self.perform_destroy(job)
+        return Response(status=status.HTTP_204_NO_CONTENT)
+        
     
     
     
