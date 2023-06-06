@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'Jobs',
     'Users',
+    'job_application',
     'rest_framework',
     'corsheaders',
     'django.contrib.sessions',
