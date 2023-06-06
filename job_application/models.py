@@ -1,12 +1,10 @@
 from django.db import models
-from Jobs.models import Jobs
 from Users.models import User
 
 
 class job_applications(models.Model):
-    id = models.IntegerField(primary_key=True)
-    job_url = models.ForeignKey(Jobs, on_delete=models.CASCADE)
-    time = models.TimeField(auto_now_add=True)
+    job_url = models.TextField(max_length=100)
+    next_event_date = models.TimeField(auto_now_add=True)
 
     class Status(models.TextChoices):
         APPLIED = "Applied"
