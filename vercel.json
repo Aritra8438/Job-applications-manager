@@ -9,5 +9,13 @@
             "src": "/(.*)",
             "dest": "backend/wsgi.py"
         }
-    ]
+    ],
+    "build": {
+    "env": {
+      "PYTHONUSERBASE": "./.python"
+    },
+    "scripts": {
+      "postinstall": "python -m spacy download en_core_web_sm && python -m nltk.downloader words && python -c \"import nltk; nltk.download('stopwords')\""
+    }
+  }
 }
