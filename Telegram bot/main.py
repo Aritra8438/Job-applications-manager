@@ -9,7 +9,7 @@ import warnings
 
 warnings.filterwarnings("ignore")
 
-API_KEY = '6204403979:AAEHWICGbr7vWYZX6Ga570dc6soU9HxDf4U'
+API_KEY = 'YOUR_API_KEY'
 bot = telebot.TeleBot(API_KEY)
 
 
