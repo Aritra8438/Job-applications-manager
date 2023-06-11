@@ -6,8 +6,15 @@ from .models import Jobs
 from .serializers import JobsSerializer
 from django.shortcuts import get_object_or_404
 from rest_framework import status
-
-
+from django.utils import timezone
+from django.contrib import messages
+from django.core.mail import send_mail
+from django.core.mail import EmailMessage
+from django.conf import settings
+from datetime import datetime
+from datetime import timedelta
+from Users.models import User
+from .utils import send_email
 def hello(request):
     return HttpResponse("Awesome, vercel app is running")
 
@@ -52,8 +59,30 @@ class JobsViewSet(ModelViewSet):
         self.perform_destroy(job)
         return Response(status=status.HTTP_204_NO_CONTENT)
         
-    
-    
+class ReminderViewSet(ModelViewSet):
+    queryset = Jobs.objects.all()
+    serializer_class = JobsSerializer
+    def List(self, request):
+        queryset = Jobs.objects.all()  
+        
+        for job in queryset:
+            serializer = JobsSerializer(job)
+            
+            last_date_to_apply = serializer.data['last_date_of_application']
+            last_date_to_apply = datetime.strptime(last_date_to_apply, "%Y-%m-%d").date()
+            
+            if (last_date_to_apply - timezone.now().date()) < timedelta( days=5 )  :
+                users = User.objects.all()
+                for user in users:
+                    email = user.email
+                    send_email(request,email);
+                
+        response = Response()    
+        response.data = {
+            'message': 'success'
+        }
+        return response
+          
     
     
     

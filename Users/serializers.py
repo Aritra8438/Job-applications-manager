@@ -1,7 +1,15 @@
 from rest_framework.serializers import ModelSerializer
-from .models import User
+from .models import User, CV
+from rest_framework import serializers
+class CVSerializer(ModelSerializer):
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
+    class Meta:
+        model = CV
+        fields = ['job_type', 'resume', 'resume_name', 'user']
+
 
 class UserSerializer(ModelSerializer):
+    
     class Meta:
         model = User
         fields = ['id', 'name', 'email', 'password']
@@ -16,5 +24,6 @@ class UserSerializer(ModelSerializer):
         user.set_password(validated_data['password'])
         user.save()
         return user    
+
 
     

@@ -6,9 +6,10 @@ from . import views
 
 router=DefaultRouter()
 router.register("", views.JobsViewSet) 
-
+# router.register("reminderview", views.ReminderViewSet)
 urlpatterns = [
     path("hello/", hello),
+    path('reminder/', views.ReminderViewSet.as_view({'get': 'List'})),
     
 ]
 
