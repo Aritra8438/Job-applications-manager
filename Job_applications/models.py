@@ -2,7 +2,7 @@ from django.db import models
 from Users.models import User
 
 
-class job_applications(models.Model):
+class Job_application(models.Model):
     job_url = models.TextField(max_length=100)
     next_event_date = models.TimeField(auto_now_add=True)
 
