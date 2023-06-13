@@ -1,0 +1,1 @@
+web: gunicorn 'JOB-APPILICATIONS-MANAGER.wsgi'

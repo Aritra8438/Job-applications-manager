@@ -11,6 +11,10 @@ class User(AbstractUser):
 
     first_name = None
     last_name = None
+    last_login = None
+    is_superuser = None
+    is_active = None
+    is_staff = None
 
     USERNAME_FIELD = "username"
     REQUIRED_FIELDS = ["password", "email"]

@@ -3,7 +3,9 @@
 import os
 import sys
 
-
+import os
+if 'PYTHONHOME' in os.environ:
+   del os.environ['PYTHONHOME']
 def main():
     """Run administrative tasks."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'backend.settings')

@@ -2,8 +2,9 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
-from .models import Jobs
-from .serializers import JobsSerializer
+from rest_framework.views import APIView
+from .models import Jobs, Company
+from .serializers import JobsSerializer, CompanySerializer
 from django.shortcuts import get_object_or_404
 from rest_framework import status
 from django.utils import timezone
@@ -14,7 +15,12 @@ from django.conf import settings
 from datetime import datetime
 from datetime import timedelta
 from Users.models import User
+from rest_framework.exceptions import APIException, AuthenticationFailed
 from .utils import send_email
+from Users.authentication import create_access_token, create_refresh_token, decode_access_token, decode_refresh_token
+from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
+from rest_framework.authentication import get_authorization_header
+
 def hello(request):
     return HttpResponse("Awesome, vercel app is running")
 
@@ -83,6 +89,94 @@ class ReminderViewSet(ModelViewSet):
         }
         return response
           
+class RegisterAPIView(APIView):
+    def post(self, request):
+        serializer = CompanySerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)    
+
+class LoginAPIView(APIView):
+    def post(self, request):
+        company = Company.objects.filter(email=request.data["email"]).first()
+
+        if not company:
+            raise APIException("Invalid credentials!")
+
+        if not company.check_password(request.data["password"]):
+            raise APIException("Invalid credentials!")
+
+        serializer = CompanySerializer(company)
+
+        access_token = create_access_token(company.id)
+        refresh_token = create_refresh_token(company.id)
+
+        response = Response()
+
+        response.set_cookie(key="refreshToken", value=refresh_token, httponly=True)
+        response.data = {"token": access_token}
+
+        return response
+    
+class UserAPIView(APIView):
+    parser_classes= (JSONParser, FormParser, MultiPartParser)
+    def get(self, request):
+        auth = get_authorization_header(request).split()
+
+        if auth and len(auth) == 2:
+            token = auth[1].decode("utf-8")
+            id = decode_access_token(token)
+
+            user = Company.objects.filter(pk=id).first()
+
+            return Response(CompanySerializer(user).data)
+
+        raise AuthenticationFailed("unauthenticated")
+    
+    
+    def post(self,request):
+        auth = get_authorization_header(request).split()
+
+        if auth and len(auth) == 2:
+            token = auth[1].decode('utf-8')
+            id = decode_access_token(token)
+
+            user = Company.objects.filter(pk=id).first()
+        request.user=user
+        
+        serializer=JobsSerializer(data=request.data,context={'request': request})
+        if serializer.is_valid():
+            
+            serializer.save()
+            print(serializer.data)
+            return Response(serializer.data, status=200)
+        
+        return Response(serializer.errors, status=400)
+    
+class JobsAPIView(APIView):
+    parser_classes= (JSONParser, FormParser, MultiPartParser)
+    def get(self, request):
+        auth = get_authorization_header(request).split()
+
+        if auth and len(auth) == 2:
+            token = auth[1].decode('utf-8')
+            id = decode_access_token(token)
+            
+            queryset = Jobs.get_all_Jobs_by_company(id)
+          
+            result=[]
+            
+            for job in queryset:
+                result.append(JobsSerializer(job).data)
+            response=Response()
+            response.data = {
+            'result': result
+            }       
+
+            return response
+
+        raise AuthenticationFailed('unauthenticated')    
+        
     
     
     

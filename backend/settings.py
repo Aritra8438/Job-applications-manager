@@ -11,12 +11,15 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 import datetime
 import dj_database_url
 import environ
-
-env = environ.Env()
-environ.Env.read_env()
+from decouple import config
+from dotenv import load_dotenv
+load_dotenv()
+# env = environ.Env()
+# environ.Env.read_env()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -30,9 +33,12 @@ SECRET_KEY = "django-insecure-_u9!tcvmc=2+=)y(t@c3hid7qn6em66h9^66f!%ei+*v@-v^5m
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["127.0.0.1", ".vercel.app"]
+# ALLOWED_HOSTS = ["127.0.0.1", ".vercel.app"]
+# ALLOWED_HOSTS = ['*']
 
-
+ALLOWED_HOSTS = ['.vercel.app', '.now.sh']
+# Or * to allow all
+ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
@@ -46,7 +52,8 @@ INSTALLED_APPS = [
     "corsheaders",
     "django.contrib.sessions",
     "django.contrib.messages",
-    "django.contrib.staticfiles",
+    'django.contrib.staticfiles',
+    # "django.contrib.staticfiles",
 ]
 
 MIDDLEWARE = [
@@ -88,17 +95,37 @@ WSGI_APPLICATION = "backend.wsgi.application"
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'Job',
+#         'NAME': 'railway',
+        
 #         'USER': 'postgres',
-#         'PASSWORD': 'pulak',
+#         'PASSWORD': 'R4H0ZMZVlhbfBYFBn5B2',
+#         'HOST': 'containers-us-west-178.railway.app',
+#         'PORT': '6606',
 #     }
 # }
 
+# DATABASES = {
+    
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'Job',
+#         'USER': 'postgres',
+#         'PASSWORD': 'pulak',
+        
+#     }
+# }
 DATABASES = {
-    "default": dj_database_url.parse(
-        "postgres://root:1TnWTIdsRF7SA1oHNPkM5vlmXdpbnDcU@dpg-ci13gdd269v7c0vgd5o0-a.oregon-postgres.render.com/job_manager"
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
+DATABASES['default'] = dj_database_url.config()
+# DATABASES = {
+#     "default": dj_database_url.parse(
+#         "postgres://root:1TnWTIdsRF7SA1oHNPkM5vlmXdpbnDcU@dpg-ci13gdd269v7c0vgd5o0-a.oregon-postgres.render.com/job_manager"
+#     )
+# }
 
 
 # Password validation
@@ -157,10 +184,19 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
+# STATICFILES_DIRS = os.path.join(BASE_DIR, 'static'),
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
+
+# STATIC_URL = "static/"
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+# STATIC_ROOT = BASE_DIR / "staticfiles_build" / "static"
 STATIC_URL = "static/"
-
-
+STATIC_ROOT = BASE_DIR/ "staticfiles_build" / "static"
+# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+# STATIC_ROOT =os.path.join(BASE_DIR, 'staticfiles')
 AUTH_USER_MODEL = "Users.User"
+
+DATE_INPUT_FORMATS = ["%d/%m/%Y"]
 
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
