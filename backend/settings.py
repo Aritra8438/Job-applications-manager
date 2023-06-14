@@ -94,10 +94,17 @@ WSGI_APPLICATION = "backend.wsgi.application"
 #     }
 # }
 
+# DATABASES = {
+#     "default": dj_database_url.parse(
+#         "postgres://root:1TnWTIdsRF7SA1oHNPkM5vlmXdpbnDcU@dpg-ci13gdd269v7c0vgd5o0-a.oregon-postgres.render.com/job_manager"
+#     )
+# }
+
 DATABASES = {
-    "default": dj_database_url.parse(
-        "postgres://root:1TnWTIdsRF7SA1oHNPkM5vlmXdpbnDcU@dpg-ci13gdd269v7c0vgd5o0-a.oregon-postgres.render.com/job_manager"
-    )
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
+    }
 }
 
 
@@ -141,6 +148,8 @@ STATIC_URL = "static/"
 
 
 AUTH_USER_MODEL = "Users.User"
+
+AUTHENTICATION_BACKENDS = (("django.contrib.auth.backends.ModelBackend"),)
 
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True

@@ -17,7 +17,7 @@ def create_access_token(id):
 def decode_access_token(token):
     try:
         payload = jwt.decode(token, "access_secret", algorithms="HS256")
-
+        print("Great access token has been decoded")
         return payload["user_id"]
     except:
         raise exceptions.AuthenticationFailed("unauthenticated")

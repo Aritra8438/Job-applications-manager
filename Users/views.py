@@ -31,8 +31,6 @@ class LoginAPIView(APIView):
         if not user.check_password(request.data["password"]):
             raise APIException("Invalid credentials!")
 
-        serializer = UserSerializer(user)
-
         access_token = create_access_token(user.id)
         refresh_token = create_refresh_token(user.id)
 
@@ -42,8 +40,6 @@ class LoginAPIView(APIView):
         response.data = {"token": access_token}
 
         return response
-
-        return Response(serializer.data)
 
 
 class UserAPIView(APIView):
