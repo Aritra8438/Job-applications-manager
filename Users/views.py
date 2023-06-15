@@ -2,6 +2,7 @@ from rest_framework.authentication import get_authorization_header
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.exceptions import APIException, AuthenticationFailed
+from Job_applications.serializers import JobApplicationSerializer
 
 from .authentication import (
     create_access_token,
@@ -31,8 +32,6 @@ class LoginAPIView(APIView):
         if not user.check_password(request.data["password"]):
             raise APIException("Invalid credentials!")
 
-        serializer = UserSerializer(user)
-
         access_token = create_access_token(user.id)
         refresh_token = create_refresh_token(user.id)
 
@@ -42,8 +41,6 @@ class LoginAPIView(APIView):
         response.data = {"token": access_token}
 
         return response
-
-        return Response(serializer.data)
 
 
 class UserAPIView(APIView):
@@ -55,8 +52,14 @@ class UserAPIView(APIView):
             id = decode_access_token(token)
 
             user = User.objects.filter(pk=id).first()
-
-            return Response(UserSerializer(user).data)
+            response = Response()
+            response.data = {
+                "user": UserSerializer(user).data,
+                "job_applications": JobApplicationSerializer(
+                    user.job_application_set.all(), many=True
+                ).data,
+            }
+            return response
 
         raise AuthenticationFailed("unauthenticated")
 
@@ -65,12 +68,17 @@ class RefreshAPIView(APIView):
     def post(self, request):
         refresh_token = request.COOKIES.get("refreshToken")
         id = decode_refresh_token(refresh_token)
+        print(id)
+        _id = request.POST["id"]
+        if str(id) != str(_id):
+            raise AuthenticationFailed("unauthenticated")
+
         access_token = create_access_token(id)
         return Response({"token": access_token})
 
 
 class LogoutAPIView(APIView):
-    def post(self, _):
+    def post(self, request):
         response = Response()
         response.delete_cookie(key="refreshToken")
         response.data = {"message": "success"}

@@ -16,4 +16,4 @@ class Job_application(models.Model):
     status = models.CharField(
         max_length=30, choices=Status.choices, default=Status.APPLIED
     )
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
