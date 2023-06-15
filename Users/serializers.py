@@ -7,14 +7,12 @@ class UserSerializer(ModelSerializer):
         model = User
         fields = ["id", "name", "email", "password", "username"]
         extra_kwargs = {"password": {"write_only": True}}
-        read_only_fields = ['is_active']
 
     def create(self, validated_data):
         user = User(
             email=validated_data["email"],
             name=validated_data["name"],
             username=validated_data["username"],
-            is_active = False,
             is_staff=False,
             is_superuser=False,
         )

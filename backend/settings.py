@@ -85,21 +85,6 @@ WSGI_APPLICATION = "backend.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'Job',
-#         'USER': 'postgres',
-#         'PASSWORD': 'pulak',
-#     }
-# }
-
-# DATABASES = {
-#     "default": dj_database_url.parse(
-#         "postgres://root:1TnWTIdsRF7SA1oHNPkM5vlmXdpbnDcU@dpg-ci13gdd269v7c0vgd5o0-a.oregon-postgres.render.com/job_manager"
-#     )
-# }
-
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
