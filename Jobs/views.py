@@ -93,9 +93,9 @@ class CompanyAPIView(APIView):
             token = auth[1].decode("utf-8")
             id = decode_access_token(token)
 
-            user = Company.objects.filter(pk=id).first()
+            company = Company.objects.filter(pk=id).first()
 
-            return Response(CompanySerializer(user).data)
+            return Response(CompanySerializer(company).data)
 
         raise AuthenticationFailed("unauthenticated")
 
