@@ -27,10 +27,7 @@ class JobsViewSet(ModelViewSet):
             id = decode_access_token(token)
 
             company = Company.objects.filter(pk=id).first()
-            print(id)
-            serializer = JobsSerializer(
-                data=request.data, context={"company": company}
-            )
+            serializer = JobsSerializer(data=request.data, context={"company": company})
             serializer.is_valid(raise_exception=True)
             serializer.save()
             return Response(serializer.data)
@@ -46,12 +43,11 @@ class JobsViewSet(ModelViewSet):
             id = decode_access_token(token)
 
             company = Company.objects.filter(pk=id).first()
-        
-            queryset = Jobs.objects.filter(company_id = company.id)
+
+            queryset = Jobs.objects.filter(company_id=company.id)
             serializer = JobsSerializer(queryset, many=True)
             return Response(serializer.data)
         raise AuthenticationFailed("unauthenticated")
-
 
     def partial_update(self, request, pk=None):
         auth = get_authorization_header(request).split()
@@ -77,7 +73,7 @@ class JobsViewSet(ModelViewSet):
 
             company = Company.objects.filter(pk=id).first()
             queryset = Jobs.objects.filter(company_id=company.id)
-        
+
             job = get_object_or_404(queryset, pk=pk)
             self.perform_destroy(job)
             return Response(status=status.HTTP_204_NO_CONTENT)
@@ -116,11 +112,10 @@ class LoginAPIView(APIView):
 class CompanyAPIView(APIView):
     def get(self, request):
         auth = get_authorization_header(request).split()
-        
+
         if auth and len(auth) == 2:
             token = auth[1].decode("utf-8")
             id = decode_access_token(token)
-            print(id)
             company = Company.objects.filter(pk=id).first()
 
             return Response(CompanySerializer(company).data)
