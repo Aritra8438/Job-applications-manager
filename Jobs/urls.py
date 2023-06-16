@@ -13,6 +13,7 @@ urlpatterns = [
     path("login/", views.LoginAPIView.as_view()),
     path("refresh/", views.RefreshAPIView.as_view()),
     path("logout/", views.LogoutAPIView.as_view()),
+    path("update/", views.UpdateJobsAPIView.as_view()),
 ]
 
 urlpatterns += router.urls
