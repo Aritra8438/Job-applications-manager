@@ -92,6 +92,12 @@ DATABASES = {
     }
 }
 
+DATABASES = {
+    "default": dj_database_url.parse(
+        "postgresql://postgres:R4H0ZMZVlhbfBYFBn5B2@containers-us-west-178.railway.app:6606/railway"
+    )
+}
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators

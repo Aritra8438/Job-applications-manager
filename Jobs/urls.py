@@ -5,7 +5,7 @@ from . import views
 
 
 router = DefaultRouter()
-router.register("", views.JobsViewSet)
+router.register("job", views.JobsViewSet)
 
 urlpatterns = [
     path("hello/", hello),
@@ -13,6 +13,7 @@ urlpatterns = [
     path("login/", views.LoginAPIView.as_view()),
     path("refresh/", views.RefreshAPIView.as_view()),
     path("logout/", views.LogoutAPIView.as_view()),
+    path("view/", views.CompanyAPIView.as_view()),
 ]
 
 urlpatterns += router.urls
