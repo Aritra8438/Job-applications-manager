@@ -10,9 +10,6 @@ def start():
     
     @scheduler.scheduled_job('interval', seconds=3, name='auto_hello')
     def auto_hello():
-        print('hey')
-        email = 'soumyadeeppatra3@gmail.com'
-        send_email(email)
-        # ReminderAPIView.as_view()
+        send_email()
 
     scheduler.start()
