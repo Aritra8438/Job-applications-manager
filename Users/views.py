@@ -37,7 +37,7 @@ class LoginAPIView(APIView):
 
         response = Response()
 
-        response.set_cookie(key="refreshToken", value=refresh_token, httponly=True)
+        response.set_cookie(key="refreshToken", value=refresh_token, httponly=False)
         response.data = {"token": access_token, "id": user.id}
 
         return response
