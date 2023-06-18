@@ -1,8 +1,10 @@
 from rest_framework.authentication import get_authorization_header
 from django.http import HttpResponse
+from django.db.models import Q
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.views import APIView
+from rest_framework.decorators import api_view
 from rest_framework.exceptions import APIException, AuthenticationFailed
 from .models import Jobs, Company
 from .serializers import JobsSerializer, CompanySerializer
@@ -137,3 +139,25 @@ class LogoutAPIView(APIView):
         response.delete_cookie(key="refreshToken")
         response.data = {"message": "success"}
         return response
+
+
+@api_view(["GET"])
+def SearchJobs(request):
+    queries = request.GET
+    company = queries.get("company")
+    skill = queries.get("skill")
+    exp = queries.get("exp")
+    if company is None:
+        company = ""
+    if skill is None:
+        skill = ""
+    if exp is None:
+        exp = 0
+
+    query_set = Jobs.objects.filter(
+        (Q(company_name__icontains=company) | Q(description__icontains=company))
+        & (Q(skills_required__icontains=skill) | Q(description__icontains=skill))
+        & (Q(experience__gte=exp))
+    )
+    serializer = JobsSerializer(query_set, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
