@@ -38,7 +38,7 @@ class LoginAPIView(APIView):
         response = Response()
 
         response.set_cookie(key="refreshToken", value=refresh_token, httponly=False)
-        response.data = {"token": access_token, "id": user.id}
+        response.data = {"token": access_token, "id": user.id, "refresh": refresh_token}
 
         return response
 
@@ -66,7 +66,9 @@ class UserAPIView(APIView):
 
 class RefreshAPIView(APIView):
     def post(self, request):
-        refresh_token = request.COOKIES.get("refreshToken")
+        refresh_token = request.POST["refresh"]
+        if refresh_token is None:
+            refresh_token = request.COOKIES.get("refreshToken")
         id = decode_refresh_token(refresh_token)
         print(id)
         _id = request.POST["id"]
