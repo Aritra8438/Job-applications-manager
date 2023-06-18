@@ -85,11 +85,17 @@ WSGI_APPLICATION = "backend.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": BASE_DIR / "db.sqlite3",
+#     }
+# }
+
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
+    "default": dj_database_url.parse(
+        "postgresql://postgres:R4H0ZMZVlhbfBYFBn5B2@containers-us-west-178.railway.app:6606/railway"
+    )
 }
 
 
@@ -138,6 +144,8 @@ AUTHENTICATION_BACKENDS = (("django.contrib.auth.backends.ModelBackend"),)
 
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
+
+PYTEST_BASE_URL = "http://127.0.0.1:8000"
 
 JWT_AUTH = {
     "JWT_EXPIRATION_DELTA": datetime.timedelta(hours=1),

@@ -1,7 +1,7 @@
 from rest_framework.authentication import get_authorization_header
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework.exceptions import APIException, AuthenticationFailed
+from rest_framework.exceptions import AuthenticationFailed
 from Job_applications.serializers import JobApplicationSerializer
 
 from .authentication import (
@@ -27,11 +27,11 @@ class LoginAPIView(APIView):
         user = User.objects.filter(email=request.data["email"]).first()
 
         if not user:
-            raise APIException("Invalid credentials!")
+            raise AuthenticationFailed("Invalid credentials!")
 
         if not user.check_password(request.data["password"]):
-            raise APIException("Invalid credentials!")
-        print("hello")
+            raise AuthenticationFailed("Invalid credentials!")
+
         access_token = create_access_token(user.id)
         refresh_token = create_refresh_token(user.id)
 
