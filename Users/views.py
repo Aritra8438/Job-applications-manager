@@ -69,9 +69,9 @@ class RefreshAPIView(APIView):
         refresh_token = request.COOKIES.get("refreshToken")
         id = decode_refresh_token(refresh_token)
         print(id)
-        _id = request.POST["id"]
-        if str(id) != str(_id):
-            raise AuthenticationFailed("unauthenticated")
+        # _id = request.POST["id"]
+        # if str(id) != str(_id):
+        #     raise AuthenticationFailed("unauthenticated")
 
         access_token = create_access_token(id)
         return Response({"token": access_token})

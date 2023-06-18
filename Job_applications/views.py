@@ -41,3 +41,6 @@ class ApplicationView(APIView):
             return Response(serializer.data)
 
         raise AuthenticationFailed("unauthenticated")
+    
+    
+        

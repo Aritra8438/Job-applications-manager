@@ -9,6 +9,11 @@ from .serializers import JobsSerializer, CompanySerializer
 from django.shortcuts import get_object_or_404
 from rest_framework import status
 from Users.authentication import *
+from django.utils import timezone
+from datetime import datetime
+from datetime import timedelta
+from Users.models import User
+# from .utils import send_email
 
 
 def hello(request):
@@ -142,3 +147,32 @@ class LogoutAPIView(APIView):
         response.delete_cookie(key="refreshToken")
         response.data = {"message": "success"}
         return response
+
+# class ReminderAPIView(APIView):
+       
+#     queryset = Jobs.objects.all()
+#     serializer_class = JobsSerializer
+    
+#     def get(self, request):
+#         queryset = Jobs.objects.all()  
+        
+#         for job in queryset:
+#             print
+#             serializer = JobsSerializer(job)
+            
+#             last_date_to_apply = serializer.data['last_date_of_application']
+#             last_date_to_apply = datetime.strptime(last_date_to_apply, "%Y-%m-%d").date()
+#             print(2+3)
+#             if (last_date_to_apply - timezone.now().date()) < timedelta( days=5 )   :
+#                 users = User.objects.all()
+#                 print(1)
+#                 for user in users:
+#                     email = 'soumyadeeppatra3@gmail.com'
+#                     print(send_email(request,email))
+                
+#         response = Response()    
+#         response.data = {
+#             'message': 'success'
+#         }
+#         return response
+          
