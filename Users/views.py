@@ -38,8 +38,8 @@ class LoginAPIView(APIView):
         response = Response()
 
         response.set_cookie(key="refreshToken", value=refresh_token, httponly=True)
-        response.data = {"token": access_token}
-        print("hello")
+        response.data = {"token": access_token, "id": user.id}
+
         return response
 
 
@@ -83,30 +83,3 @@ class LogoutAPIView(APIView):
         response.delete_cookie(key="refreshToken")
         response.data = {"message": "success"}
         return response
-
-class UpdateAPIView(APIView):
-    def put(self, request):
-        auth = get_authorization_header(request).split()
-
-        if auth and len(auth) == 2:
-            token = auth[1].decode("utf-8")
-            id = decode_access_token(token)
-
-            user = User.objects.filter(pk=id).first()
-            print(id)
-            if not user:
-                raise APIException("Invalid credentials!")
-            else:
-                if len(request.data["email"]) == 0:
-                    serializer = UserSerializer(user, data=request.data,partial=True)
-                    serializer.is_valid(raise_exception=True)
-                    serializer.save()
-                    return Response(serializer.data)
-                else:
-                    response=Response()
-                    response.data={"message": "Cant change email address."}
-                    return response
-        else:
-            response=Response()
-            response.data={"message": "Wrong Credentials."}
-            return response

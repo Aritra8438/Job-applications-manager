@@ -41,8 +41,10 @@ class ApplicationView(APIView):
             return Response(serializer.data)
 
         raise AuthenticationFailed("unauthenticated")
-    
-    def put(self, request):
+
+
+class ApplicationByIdView(APIView):
+    def get(self, request, pk):
         auth = get_authorization_header(request).split()
 
         if auth and len(auth) == 2:
@@ -50,8 +52,28 @@ class ApplicationView(APIView):
             id = decode_access_token(token)
 
             user = User.objects.filter(pk=id).first()
-            job_applications = Job_application.objects.filter(user=user)
-            serializer = JobApplicationSerializer(job_applications, data=request.data, partial=True)
+            job_application = Job_application.objects.get(id=id)
+            if job_application.user != user:
+                raise AuthenticationFailed("unauthenticated")
+            serializer = JobApplicationSerializer(job_application)
+            return Response(serializer.data)
+
+        raise AuthenticationFailed("unauthenticated")
+
+    def patch(self, request, pk):
+        auth = get_authorization_header(request).split()
+
+        if auth and len(auth) == 2:
+            token = auth[1].decode("utf-8")
+            id = decode_access_token(token)
+
+            user = User.objects.filter(pk=id).first()
+            job_application = Job_application.objects.get(id=id)
+            if job_application.user != user:
+                raise AuthenticationFailed("unauthenticated")
+            serializer = JobApplicationSerializer(
+                job_application, data=request.data, partial=True
+            )
             serializer.is_valid(raise_exception=True)
             serializer.save()
             return Response(serializer.data)
