@@ -22,12 +22,12 @@ class CompanySerializer(serializers.ModelSerializer):
 
 
 class JobsSerializer(serializers.ModelSerializer):
-    # company = serializers.HiddenField(default=serializers.CurrentUserDefault())
     read_only_fields = ["company"]
 
     class Meta:
         model = Jobs
         fields = "__all__"
+
     def create(self, validated_data):
         company = self.context["company"]
         jobs = Jobs(
@@ -35,4 +35,4 @@ class JobsSerializer(serializers.ModelSerializer):
             company=company,
         )
         jobs.save()
-        return jobs   
+        return jobs

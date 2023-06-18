@@ -6,7 +6,7 @@ class JobApplicationSerializer(serializers.ModelSerializer):
     # user = serializers.HiddenField(default=serializers.CurrentUserDefault())
     class Meta:
         model = Job_application
-        fields = ["job_url", "status", "user","eventdate", "job_name" ]
+        fields = ["id", "job_url", "status", "user"]
         read_only_fields = ["user"]
 
     def create(self, validated_data):

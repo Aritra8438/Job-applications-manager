@@ -15,7 +15,7 @@ urlpatterns = [
     path("refresh/", views.RefreshAPIView.as_view()),
     path("logout/", views.LogoutAPIView.as_view()),
     path("view/", views.CompanyAPIView.as_view()),
-    # path("rem/", views.ReminderAPIView.as_view()),
+    path("search/", views.SearchJobs),
 ]
 
 urlpatterns += router.urls

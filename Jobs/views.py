@@ -1,8 +1,10 @@
 from rest_framework.authentication import get_authorization_header
 from django.http import HttpResponse
+from django.db.models import Q
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.views import APIView
+from rest_framework.decorators import api_view
 from rest_framework.exceptions import APIException, AuthenticationFailed
 from .models import Jobs, Company
 from .serializers import JobsSerializer, CompanySerializer
@@ -32,10 +34,7 @@ class JobsViewSet(ModelViewSet):
             id = decode_access_token(token)
 
             company = Company.objects.filter(pk=id).first()
-            print(id)
-            serializer = JobsSerializer(
-                data=request.data, context={"company": company}
-            )
+            serializer = JobsSerializer(data=request.data, context={"company": company})
             serializer.is_valid(raise_exception=True)
             serializer.save()
             return Response(serializer.data)
@@ -51,12 +50,11 @@ class JobsViewSet(ModelViewSet):
             id = decode_access_token(token)
 
             company = Company.objects.filter(pk=id).first()
-        
-            queryset = Jobs.objects.filter(company_id = company.id)
+
+            queryset = Jobs.objects.filter(company_id=company.id)
             serializer = JobsSerializer(queryset, many=True)
             return Response(serializer.data)
         raise AuthenticationFailed("unauthenticated")
-
 
     def partial_update(self, request, pk=None):
         auth = get_authorization_header(request).split()
@@ -82,7 +80,7 @@ class JobsViewSet(ModelViewSet):
 
             company = Company.objects.filter(pk=id).first()
             queryset = Jobs.objects.filter(company_id=company.id)
-        
+
             job = get_object_or_404(queryset, pk=pk)
             self.perform_destroy(job)
             return Response(status=status.HTTP_204_NO_CONTENT)
@@ -112,7 +110,7 @@ class LoginAPIView(APIView):
 
         response = Response()
 
-        response.set_cookie(key="refreshToken", value=refresh_token, httponly=True)
+        response.set_cookie(key="refreshToken", value=refresh_token, httponly=False)
         response.data = {"token": access_token}
 
         return response
@@ -121,11 +119,10 @@ class LoginAPIView(APIView):
 class CompanyAPIView(APIView):
     def get(self, request):
         auth = get_authorization_header(request).split()
-        
+
         if auth and len(auth) == 2:
             token = auth[1].decode("utf-8")
             id = decode_access_token(token)
-            print(id)
             company = Company.objects.filter(pk=id).first()
 
             return Response(CompanySerializer(company).data)
@@ -148,31 +145,24 @@ class LogoutAPIView(APIView):
         response.data = {"message": "success"}
         return response
 
-# class ReminderAPIView(APIView):
-       
-#     queryset = Jobs.objects.all()
-#     serializer_class = JobsSerializer
-    
-#     def get(self, request):
-#         queryset = Jobs.objects.all()  
-        
-#         for job in queryset:
-#             print
-#             serializer = JobsSerializer(job)
-            
-#             last_date_to_apply = serializer.data['last_date_of_application']
-#             last_date_to_apply = datetime.strptime(last_date_to_apply, "%Y-%m-%d").date()
-#             print(2+3)
-#             if (last_date_to_apply - timezone.now().date()) < timedelta( days=5 )   :
-#                 users = User.objects.all()
-#                 print(1)
-#                 for user in users:
-#                     email = 'soumyadeeppatra3@gmail.com'
-#                     print(send_email(request,email))
-                
-#         response = Response()    
-#         response.data = {
-#             'message': 'success'
-#         }
-#         return response
-          
+
+@api_view(["GET"])
+def SearchJobs(request):
+    queries = request.GET
+    company = queries.get("company")
+    skill = queries.get("skill")
+    exp = queries.get("exp")
+    if company is None:
+        company = ""
+    if skill is None:
+        skill = ""
+    if exp is None:
+        exp = 0
+
+    query_set = Jobs.objects.filter(
+        (Q(company_name__icontains=company) | Q(description__icontains=company))
+        & (Q(skills_required__icontains=skill) | Q(description__icontains=skill))
+        & (Q(experience__gte=exp))
+    )
+    serializer = JobsSerializer(query_set, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)

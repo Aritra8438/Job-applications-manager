@@ -1,7 +1,7 @@
 from rest_framework.authentication import get_authorization_header
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework.exceptions import APIException, AuthenticationFailed
+from rest_framework.exceptions import AuthenticationFailed
 from Job_applications.serializers import JobApplicationSerializer
 
 from .authentication import (
@@ -27,18 +27,18 @@ class LoginAPIView(APIView):
         user = User.objects.filter(email=request.data["email"]).first()
 
         if not user:
-            raise APIException("Invalid credentials!")
+            raise AuthenticationFailed("Invalid credentials!")
 
         if not user.check_password(request.data["password"]):
-            raise APIException("Invalid credentials!")
+            raise AuthenticationFailed("Invalid credentials!")
 
         access_token = create_access_token(user.id)
         refresh_token = create_refresh_token(user.id)
 
         response = Response()
 
-        response.set_cookie(key="refreshToken", value=refresh_token, httponly=True)
-        response.data = {"token": access_token}
+        response.set_cookie(key="refreshToken", value=refresh_token, httponly=False)
+        response.data = {"token": access_token, "id": user.id, "refresh": refresh_token}
 
         return response
 
@@ -66,7 +66,9 @@ class UserAPIView(APIView):
 
 class RefreshAPIView(APIView):
     def post(self, request):
-        refresh_token = request.COOKIES.get("refreshToken")
+        refresh_token = request.POST["refresh"]
+        if refresh_token is None:
+            refresh_token = request.COOKIES.get("refreshToken")
         id = decode_refresh_token(refresh_token)
         print(id)
         # _id = request.POST["id"]
