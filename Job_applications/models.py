@@ -3,10 +3,8 @@ from Users.models import User
 
 
 class Job_application(models.Model):
-    job_name = models.CharField(max_length=100, null=True)
     job_url = models.TextField(max_length=100)
     next_event_date = models.TimeField(auto_now_add=True)
-    eventdate = models.DateField(null=True)
 
     class Status(models.TextChoices):
         APPLIED = "Applied"

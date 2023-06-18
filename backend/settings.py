@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    'django_apscheduler',
+    "django_apscheduler",
 ]
 
 MIDDLEWARE = [
@@ -154,13 +154,13 @@ JWT_AUTH = {
     "JWT_RESPONSE_PAYLOAD_HANDLER": "users.views.custom_jwt.jwt_response_payload_handler",
 }
 
-EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST = "smtp.gmail.com"
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'chatterjeeraiaa@gmail.com'
-EMAIL_HOST_PASSWORD = 'ejkqnjhgbriogygu'
+EMAIL_HOST_USER = "chatterjeeraiaa@gmail.com"
+EMAIL_HOST_PASSWORD = "ejkqnjhgbriogygu"
 
-APSCHEDULER_DATETIME_FORMAT = "N j, Y, f:s a"  # Default
+APSCHEDULER_DATETIME_FORMAT = "N j, Y, f:s a"
 
 SCHEDULER_DEFAULT = True
 # Default primary key field type

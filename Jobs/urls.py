@@ -7,7 +7,6 @@ from . import views
 router = DefaultRouter()
 router.register("job", views.JobsViewSet)
 
-
 urlpatterns = [
     path("hello/", hello),
     path("register/", views.RegisterAPIView.as_view()),

@@ -11,11 +11,6 @@ from .serializers import JobsSerializer, CompanySerializer
 from django.shortcuts import get_object_or_404
 from rest_framework import status
 from Users.authentication import *
-from django.utils import timezone
-from datetime import datetime
-from datetime import timedelta
-from Users.models import User
-# from .utils import send_email
 
 
 def hello(request):
