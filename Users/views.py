@@ -10,9 +10,12 @@ from .authentication import (
     decode_access_token,
     decode_refresh_token,
 )
-from .serializers import UserSerializer
+from .serializers import UserSerializer, ChangePasswordSerializer
 from .models import User
 
+from rest_framework import status
+from rest_framework import generics
+from rest_framework.permissions import IsAuthenticated   
 
 class RegisterAPIView(APIView):
     def post(self, request):
@@ -85,3 +88,38 @@ class LogoutAPIView(APIView):
         response.delete_cookie(key="refreshToken")
         response.data = {"message": "success"}
         return response
+
+class UpdatePassword(APIView):
+    """
+    An endpoint for changing password.
+    """
+    
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+    def put(self, request, *args, **kwargs):
+        auth = get_authorization_header(request).split()
+
+        if auth and len(auth) == 2:
+            token = auth[1].decode("utf-8")
+            id = decode_access_token(token)
+            user = User.objects.get(id=id)
+        
+            serializer = ChangePasswordSerializer(data=request.data)
+
+            if serializer.is_valid():
+                # Check old password
+                old_password = serializer.data.get("old_password")
+                if not user.check_password(old_password):
+                    return Response({"old_password": ["Wrong password."]}, 
+                                    status=status.HTTP_400_BAD_REQUEST)
+                # set_password also hashes the password that the user will get
+                user.set_password(serializer.data.get("new_password"))
+                user.save()
+                response = Response(status=status.HTTP_204_NO_CONTENT)
+                response.data = {"message": "success"}
+                return response
+               
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        raise AuthenticationFailed("unauthenticated")

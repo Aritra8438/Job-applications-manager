@@ -1,4 +1,5 @@
 from rest_framework.serializers import ModelSerializer
+from rest_framework import serializers
 from .models import User
 
 
@@ -19,3 +20,8 @@ class UserSerializer(ModelSerializer):
         user.set_password(validated_data["password"])
         user.save()
         return user
+
+class ChangePasswordSerializer(serializers.Serializer):
+    model = User
+    old_password = serializers.CharField(required=True)
+    new_password = serializers.CharField(required=True)
