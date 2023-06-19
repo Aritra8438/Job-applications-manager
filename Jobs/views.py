@@ -51,6 +51,20 @@ class JobsViewSet(ModelViewSet):
             return Response(serializer.data)
         raise AuthenticationFailed("unauthenticated")
 
+    def retrieve(self, request, pk=None):
+        auth = get_authorization_header(request).split()
+
+        if auth and len(auth) == 2:
+            token = auth[1].decode("utf-8")
+            id = decode_access_token(token)
+            job = Jobs.objects.get(id=pk)
+            company = Company.objects.filter(pk=id).first()
+            if job.company != company:
+                raise AuthenticationFailed("unauthenticated")
+            serializer = JobsSerializer(job)
+            return Response(serializer.data)
+        raise AuthenticationFailed("unauthenticated")
+
     def partial_update(self, request, pk=None):
         auth = get_authorization_header(request).split()
 
@@ -59,8 +73,9 @@ class JobsViewSet(ModelViewSet):
             id = decode_access_token(token)
 
             company = Company.objects.filter(pk=id).first()
-            queryset = Jobs.objects.filter(company_id=company.id)
-            job = get_object_or_404(queryset, pk=pk)
+            job = Jobs.objects.get(id=pk)
+            if job.company != company:
+                raise AuthenticationFailed("unauthenticated")
             serializer = self.get_serializer(job, data=request.data, partial=True)
             serializer.is_valid(raise_exception=True)
             serializer.save()
@@ -74,9 +89,9 @@ class JobsViewSet(ModelViewSet):
             id = decode_access_token(token)
 
             company = Company.objects.filter(pk=id).first()
-            queryset = Jobs.objects.filter(company_id=company.id)
-
-            job = get_object_or_404(queryset, pk=pk)
+            job = Jobs.objects.get(id=pk)
+            if job.company != company:
+                raise AuthenticationFailed("unauthenticated")
             self.perform_destroy(job)
             return Response(status=status.HTTP_204_NO_CONTENT)
         raise AuthenticationFailed("unauthenticated")
