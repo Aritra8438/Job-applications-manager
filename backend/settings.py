@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    'django_rest_passwordreset',
 ]
 
 MIDDLEWARE = [
@@ -152,5 +153,13 @@ JWT_AUTH = {
     "JWT_ALLOW_REFRESH": True,
     "JWT_RESPONSE_PAYLOAD_HANDLER": "users.views.custom_jwt.jwt_response_payload_handler",
 }
+
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "chatterjeeraiaa@gmail.com"
+EMAIL_HOST_PASSWORD = "ejkqnjhgbriogygu"
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

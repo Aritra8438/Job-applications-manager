@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
 
 urlpatterns = [
@@ -7,4 +7,6 @@ urlpatterns = [
     path("", views.UserAPIView.as_view()),
     path("refresh/", views.RefreshAPIView.as_view()),
     path("logout/", views.LogoutAPIView.as_view()),
+    path("changepass/", views.UpdatePassword.as_view()),
+    path('password_reset/', include('django_rest_passwordreset.urls', namespace='password_reset')),
 ]
