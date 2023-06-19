@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    'django_rest_passwordreset',
+    "django_rest_passwordreset",
     "django_apscheduler",
 ]
 
@@ -160,5 +160,9 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = "chatterjeeraiaa@gmail.com"
 EMAIL_HOST_PASSWORD = "ejkqnjhgbriogygu"
+
+APSCHEDULER_DATETIME_FORMAT = "N j, Y, f:s a"
+
+SCHEDULER_DEFAULT = True
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
