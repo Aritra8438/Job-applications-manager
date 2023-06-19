@@ -52,7 +52,7 @@ class ApplicationByIdView(APIView):
             id = decode_access_token(token)
 
             user = User.objects.filter(pk=id).first()
-            job_application = Job_application.objects.get(id=id)
+            job_application = Job_application.objects.get(id=pk)
             if job_application.user != user:
                 raise AuthenticationFailed("unauthenticated")
             serializer = JobApplicationSerializer(job_application)
@@ -67,8 +67,8 @@ class ApplicationByIdView(APIView):
             token = auth[1].decode("utf-8")
             id = decode_access_token(token)
 
-            user = User.objects.filter(pk=id).first()
-            job_application = Job_application.objects.get(id=id)
+            user = User.objects.filter(id=id).first()
+            job_application = Job_application.objects.get(id=pk)
             if job_application.user != user:
                 raise AuthenticationFailed("unauthenticated")
             serializer = JobApplicationSerializer(
@@ -77,5 +77,21 @@ class ApplicationByIdView(APIView):
             serializer.is_valid(raise_exception=True)
             serializer.save()
             return Response(serializer.data)
+
+        raise AuthenticationFailed("unauthenticated")
+
+    def delete(self, request, pk):
+        auth = get_authorization_header(request).split()
+
+        if auth and len(auth) == 2:
+            token = auth[1].decode("utf-8")
+            id = decode_access_token(token)
+
+            user = User.objects.filter(id=id).first()
+            job_application = Job_application.objects.get(id=pk)
+            if job_application.user != user:
+                raise AuthenticationFailed("unauthenticated")
+            job_application.delete()
+            return Response("Job-application deleted", status=200)
 
         raise AuthenticationFailed("unauthenticated")
