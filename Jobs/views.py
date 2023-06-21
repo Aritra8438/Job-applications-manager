@@ -110,10 +110,10 @@ class LoginAPIView(APIView):
         company = Company.objects.filter(email=request.data["email"]).first()
 
         if not company:
-            raise APIException("Invalid credentials!")
+            raise AuthenticationFailed("Invalid credentials!")
 
         if not company.check_password(request.data["password"]):
-            raise APIException("Invalid credentials!")
+            raise AuthenticationFailed("Invalid credentials!")
 
         access_token = create_access_token(company.id)
         refresh_token = create_refresh_token(company.id)
@@ -121,7 +121,11 @@ class LoginAPIView(APIView):
         response = Response()
 
         response.set_cookie(key="refreshToken", value=refresh_token, httponly=False)
-        response.data = {"token": access_token}
+        response.data = {
+            "token": access_token,
+            "id": company.id,
+            "refresh": refresh_token,
+        }
 
         return response
 
@@ -142,8 +146,15 @@ class CompanyAPIView(APIView):
 
 class RefreshAPIView(APIView):
     def post(self, request):
-        refresh_token = request.COOKIES.get("refreshToken")
+        refresh_token = request.POST["refresh"]
+        if refresh_token is None:
+            refresh_token = request.COOKIES.get("refreshToken")
         id = decode_refresh_token(refresh_token)
+        print(id)
+        _id = request.POST["id"]
+        if str(id) != str(_id):
+            raise AuthenticationFailed("unauthenticated")
+
         access_token = create_access_token(id)
         return Response({"token": access_token})
 
