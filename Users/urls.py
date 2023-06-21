@@ -9,7 +9,7 @@ urlpatterns = [
     path("logout/", views.LogoutAPIView.as_view()),
     path("change-password/", views.UpdatePassword.as_view()),
     path(
-        "password_reset/",
+        "password-reset/",
         include("django_rest_passwordreset.urls", namespace="password_reset"),
     ),
 ]
