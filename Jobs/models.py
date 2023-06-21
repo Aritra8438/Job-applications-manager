@@ -3,7 +3,6 @@ from Users.models import User
 
 
 class Company(User):
-    company_name = models.CharField(max_length=100, null=True)
     head_quarters = models.CharField(max_length=20)
     openings = models.IntegerField()
 
