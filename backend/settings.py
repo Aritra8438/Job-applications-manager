@@ -154,6 +154,8 @@ JWT_AUTH = {
     "JWT_ALLOW_REFRESH": True,
     "JWT_RESPONSE_PAYLOAD_HANDLER": "users.views.custom_jwt.jwt_response_payload_handler",
 }
+APSCHEDULER_DATETIME_FORMAT = "N j, Y, f:s a"
+SCHEDULER_DEFAULT = True
 
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_USE_TLS = True
