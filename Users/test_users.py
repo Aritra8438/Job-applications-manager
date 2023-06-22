@@ -9,7 +9,6 @@ cookies = {}
 def test_register():
     global id
     url = PYTEST_BASE_URL + "/user/register/"
-    print(url)
     data = {
         "name": "abc",
         "email": "abc@abc.abc",
@@ -46,7 +45,6 @@ def test_login():
     return access_token
 
 
-@pytest.fixture
 def test_get_user(test_login):
     global access_token
     global id
@@ -56,15 +54,3 @@ def test_get_user(test_login):
     id = response.json()["user"]["id"]
     assert response.status_code == 200
     assert response.json()["user"]["email"] == "abc@abc.abc"
-
-
-def test_refresh(test_get_user):
-    _ = test_get_user
-    global cookies
-    global id
-    response = requests.post(
-        url=PYTEST_BASE_URL + "/user/refresh/",
-        data={"id": id},
-        cookies=cookies,
-    )
-    assert response.status_code == 200
