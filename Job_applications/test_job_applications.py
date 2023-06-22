@@ -7,6 +7,7 @@ def test_post_job_application(test_login):
     url = PYTEST_BASE_URL + "/job-application/"
     access_token = test_login
     data = {
+        "company_name": "Google",
         "job_url": "a@a.com",
         "status": "Interview",
     }
