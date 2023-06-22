@@ -1,0 +1,811 @@
+{
+	"info": {
+		"_postman_id": "bfe1f8e7-6719-4e68-88ec-00ec129b5fb2",
+		"name": "Vercel",
+		"description": "This is the API documentation of the most common APIs of [Job-applicatons-manager](https://github.com/Aritra8438/Job-applications-manager).\n\nThey are sub-divided according to django-apps.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27795030",
+		"_collection_link": "https://cloudy-meadow-2263.postman.co/workspace/Job-application-view~cf444694-42cc-415a-b2d5-e6c50604e60b/collection/27795030-bfe1f8e7-6719-4e68-88ec-00ec129b5fb2?action=share&creator=27795030&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Register User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "aritra",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "aritrajuee@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "ThisIsDemoPassword",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "aritra8438",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://job-applications-manager.vercel.app/user/register/",
+							"protocol": "https",
+							"host": [
+								"job-applications-manager",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"user",
+								"register",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJleHAiOjE2ODY3NzYwNjksImlhdCI6MTY4Njc3NTc2OX0.G3ClCJkOy2MKMMPKnfk-vxHPikhh98LYzLHfySwdnUg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "aritrajuee@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "ThisIsDemoPassword",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "F",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "https://job-applications-manager.vercel.app/user/login/",
+							"protocol": "https",
+							"host": [
+								"job-applications-manager",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"user",
+								"login",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh access token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "refresh",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2ODc3MjMyNjQsImlhdCI6MTY4NzExODQ2NH0.IVCV8gVhi9BTeP21FjQvTmNiycCbMkfhmvdcFfpBGvA",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://job-applications-manager.vercel.app/user/refresh/",
+							"protocol": "https",
+							"host": [
+								"job-applications-manager",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"user",
+								"refresh",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://job-applications-manager.vercel.app/user/logout/",
+							"protocol": "https",
+							"host": [
+								"job-applications-manager",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"user",
+								"logout",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get User",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2ODc0MTM5MDIsImlhdCI6MTY4NzQxMzYwMn0.-m5jjZE1Qsra2Ju68jwsXoDtZ6FK-JfZb8_ET1y23Do",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "a",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "a",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "a@a.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://job-applications-manager.vercel.app/user/",
+							"protocol": "https",
+							"host": [
+								"job-applications-manager",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"user",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "All the User endpoints are here. They have path `/user/.`"
+		},
+		{
+			"name": "Job-applications",
+			"item": [
+				{
+					"name": "get Job-applications",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2ODc0MTUyMjAsImlhdCI6MTY4NzQxNDkyMH0.E5yh_1A5HubQPaqzfYF8IQoszjxhF6SwWALDloQqXBQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "job_url",
+									"value": "b",
+									"type": "text"
+								},
+								{
+									"key": "user",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://job-applications-manager.vercel.app/job-application/",
+							"protocol": "https",
+							"host": [
+								"job-applications-manager",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"job-application",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post Job-application",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2ODc0MTYyMzAsImlhdCI6MTY4NzQxNTkzMH0.oMgqaA14PenCVCHISyQviZ5UpnrXG162HpHBufo_eBg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "job_url",
+									"value": "www.amazon.com",
+									"type": "text"
+								},
+								{
+									"key": "status",
+									"value": "Interview",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://job-applications-manager.vercel.app/job-application/",
+							"protocol": "https",
+							"host": [
+								"job-applications-manager",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"job-application",
+								""
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Job-application by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2ODc0MTYyMzAsImlhdCI6MTY4NzQxNTkzMH0.oMgqaA14PenCVCHISyQviZ5UpnrXG162HpHBufo_eBg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://job-applications-manager.vercel.app/job-application/2",
+							"protocol": "https",
+							"host": [
+								"job-applications-manager",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"job-application",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "patch Job-application by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2ODc0MTYyMzAsImlhdCI6MTY4NzQxNTkzMH0.oMgqaA14PenCVCHISyQviZ5UpnrXG162HpHBufo_eBg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "status",
+									"value": "Accepted",
+									"type": "text"
+								},
+								{
+									"key": "job_url",
+									"value": "www.google.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://job-applications-manager.vercel.app/job-application/2",
+							"protocol": "https",
+							"host": [
+								"job-applications-manager",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"job-application",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Job application by Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2ODc0MTYyMzAsImlhdCI6MTY4NzQxNTkzMH0.oMgqaA14PenCVCHISyQviZ5UpnrXG162HpHBufo_eBg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://job-applications-manager.vercel.app/job-application/3",
+							"protocol": "https",
+							"host": [
+								"job-applications-manager",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"job-application",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "All the job-application endpoints are here. They have path `/job-application/.`"
+		},
+		{
+			"name": "Companies",
+			"item": [
+				{
+					"name": "Register company",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "job-tracker",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "abc@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "ThisIsDemoPassword",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "trackr",
+									"type": "text"
+								},
+								{
+									"key": "head_quarters",
+									"value": "\"Bangalore\"",
+									"type": "text"
+								},
+								{
+									"key": "openings",
+									"value": "0",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://job-applications-manager.vercel.app/company/register/",
+							"protocol": "https",
+							"host": [
+								"job-applications-manager",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"company",
+								"register",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login company",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "abc@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "ThisIsDemoPassword",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://job-applications-manager.vercel.app/company/login/",
+							"protocol": "https",
+							"host": [
+								"job-applications-manager",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"company",
+								"login",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh Company",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "id",
+									"value": "7",
+									"type": "text"
+								},
+								{
+									"key": "refresh",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo3LCJleHAiOjE2ODgwMjI0NjksImlhdCI6MTY4NzQxNzY2OX0.v0Do9_HFCfep1jPqRWFPNWBzkUr3KSW6NKTbslok3I4",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://job-applications-manager.vercel.app/company/refresh/",
+							"protocol": "https",
+							"host": [
+								"job-applications-manager",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"company",
+								"refresh",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout company",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://job-applications-manager.vercel.app/company/logout/",
+							"protocol": "https",
+							"host": [
+								"job-applications-manager",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"company",
+								"logout",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post job",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo3LCJleHAiOjE2ODc0MTgyMjksImlhdCI6MTY4NzQxNzkyOX0.kfIIQ3vQ4BGbFcBCsgQ6VSN6T-6rcXlTmHvZd60bSZ0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"description\": \"Hello, currently we are looking for backend dev\",\r\n    \"company_name\": \"trackr\",\r\n    \"experience\": 3,\r\n    \"job_id\": \"69\",\r\n    \"job_url\": \"www.hello.com\",\r\n    \"location\": \"Bangalore\",\r\n    \"skills_required\": \"Rest APIs\",\r\n    \"publishing_time\": \"2023-06-23T08:35:57.308685Z\",\r\n    \"last_date_of_application\": \"2023-10-22\",\r\n    \"test_date\": null,\r\n    \"interview_date\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://job-applications-manager.vercel.app/company/job/",
+							"protocol": "https",
+							"host": [
+								"job-applications-manager",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"company",
+								"job",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Test",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://job-applications-manager.vercel.app/company/hello",
+							"protocol": "https",
+							"host": [
+								"job-applications-manager",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"company",
+								"hello"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Job",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://job-applications-manager.vercel.app/company/search?company=trackr&skill=Rest APIs&exp=3",
+							"protocol": "https",
+							"host": [
+								"job-applications-manager",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"company",
+								"search"
+							],
+							"query": [
+								{
+									"key": "company",
+									"value": "trackr"
+								},
+								{
+									"key": "skill",
+									"value": "Rest APIs"
+								},
+								{
+									"key": "exp",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all jobs by company",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo3LCJleHAiOjE2ODc0MTkxMjcsImlhdCI6MTY4NzQxODgyN30.fF0ChfD3nPCEvXTlzBkpvPBumPVWTxErlqE_bvPhw84",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://job-applications-manager.vercel.app/company/job/",
+							"protocol": "https",
+							"host": [
+								"job-applications-manager",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"company",
+								"job",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get job by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo3LCJleHAiOjE2ODc0MTkxMjcsImlhdCI6MTY4NzQxODgyN30.fF0ChfD3nPCEvXTlzBkpvPBumPVWTxErlqE_bvPhw84",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://job-applications-manager.vercel.app/company/job/5",
+							"protocol": "https",
+							"host": [
+								"job-applications-manager",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"company",
+								"job",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Patch job by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo3LCJleHAiOjE2ODc0MTkxMjcsImlhdCI6MTY4NzQxODgyN30.fF0ChfD3nPCEvXTlzBkpvPBumPVWTxErlqE_bvPhw84",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "job_id",
+									"value": "500",
+									"type": "text"
+								},
+								{
+									"key": "skills_required",
+									"value": "recursion",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://job-applications-manager.vercel.app/company/job/5/",
+							"protocol": "https",
+							"host": [
+								"job-applications-manager",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"company",
+								"job",
+								"5",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "All the jobs and company endpoints are here. They have path `/company/.`"
+		}
+	]
+}

@@ -115,5 +115,13 @@ $ git push origin <new branch>
 
 Thank you for your contribution.
 
+## API Documentation.
 
+Most of the APIs are available in [this](https://documenter.getpostman.com/view/27795030/2s93z5A5J6) postman documentation.
+
+Alternatively, the Postman collection can be imported using `Vercel.postman_collection.json`.
+
+Here is a screenshot of the same.
+
+<img width="946" alt="image" src="https://github.com/Aritra8438/Job-applications-manager/assets/64671908/76afcd82-e597-46b4-be57-ddc1e7189efd">
 
