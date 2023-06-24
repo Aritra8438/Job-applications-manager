@@ -5,13 +5,13 @@ To quickly jump to a subsection,
 
 * [Website](https://github.com/Aritra8438/Job-applications-manager/tree/main#website)             
                 
-* [Telegram Bot Documnetation](https://github.com/Aritra8438/Job-applications-manager/tree/main#website-the-website-is-live)                
+* [Telegram Bot Documnetation](https://github.com/Aritra8438/Job-applications-manager/tree/main#telegram-bot-documentation)                
                 
-* [Local Development Setup](https://github.com/Aritra8438/Job-applications-manager/tree/main#website-the-website-is-live)                
+* [Local Development Setup](https://github.com/Aritra8438/Job-applications-manager/tree/main#local-developmemt-setup)                
 
-* [Contribution Workflow](https://github.com/Aritra8438/Job-applications-manager/tree/main#website-the-website-is-live)
+* [Contribution Workflow](https://github.com/Aritra8438/Job-applications-manager/tree/main#contribution-workflow)
   
-* [Pytest](https://github.com/Aritra8438/Job-applications-manager/tree/main#website-the-website-is-live)
+* [Pytest](https://github.com/Aritra8438/Job-applications-manager/tree/main#pytest)
 
 # Website 
 <a href="https://job-application-manager.netlify.app/"><strong>Our website is live!</strong></a>
