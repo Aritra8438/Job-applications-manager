@@ -1,13 +1,13 @@
 # Job-applications-manager
 
-# Index <br>
+# Index 
 To quickly jump to a subsection, 
 
-* [Website](https://github.com/Aritra8438/Job-applications-manager/tree/main#website-the-website-is-live)             
+* [Website](https://github.com/Aritra8438/Job-applications-manager/tree/main#website)             
                 
 * [Telegram Bot Documnetation](https://github.com/Aritra8438/Job-applications-manager/tree/main#website-the-website-is-live)                
                 
-* [Contribution Workflow](https://github.com/Aritra8438/Job-applications-manager/tree/main#website-the-website-is-live)                
+* [Local Development Setup](https://github.com/Aritra8438/Job-applications-manager/tree/main#website-the-website-is-live)                
 
 * [Contribution Workflow](https://github.com/Aritra8438/Job-applications-manager/tree/main#website-the-website-is-live)
   
