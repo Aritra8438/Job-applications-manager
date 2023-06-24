@@ -1,5 +1,14 @@
 # Job-applications-manager
-# Our website is live. Access it here:
+
+
+# Website 
+<a href="https://job-application-manager.netlify.app/"><strong>Our website is live!</strong></a>
+<br>
+- The backend application is hosted on **Vercel**.
+- The frontend application is hosted on **Netlify**.
+<br>
+<img width="946" alt="image" src="https://github.com/Aritra8438/Job-applications-manager/assets/64671908/bee3a93e-9647-4931-9a4b-4011ebb38046">
+<br>
 
 
 # Telegram Bot Documentation:
