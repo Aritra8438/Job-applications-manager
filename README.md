@@ -8,6 +8,15 @@
 <a href="https://github.com/Aritra8438/Demo_E-commerce_Site/tree/master"><img src="https://img.shields.io/github/issues-pr-closed/Aritra8438/Job-applications-manager?style=for-the-badge&logo=github" alt="MIT" /></a>
 </p>
 
+Hi, everyone. Welcome to this repository.
+
+**This project helps you keep track of all your job applications and might remind you of an interview beforehand.**
+
+We also offer other supports, please refer to the Feature section.
+
+It's a collaborative open-source project we did (are doing) as a part of our code submission for the MLH fellowship.
+We have exposed most of our APIs in the Postman documentation, it also contains frontend if you intend to use it.
+
 # Index 
 To quickly jump to a subsection, 
 
