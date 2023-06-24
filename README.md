@@ -5,7 +5,7 @@ To quickly jump to a subsection,
 
 * [Website](https://github.com/Aritra8438/Job-applications-manager/tree/main#website)             
                 
-* [Telegram Bot Documnetation](https://github.com/Aritra8438/Job-applications-manager/tree/main#telegram-bot-documentation)                
+* [Telegram Bot Documentation](https://github.com/Aritra8438/Job-applications-manager/tree/main#telegram-bot-documentation)                
                 
 * [Local Development Setup](https://github.com/Aritra8438/Job-applications-manager/tree/main#local-developmemt-setup)                
 
