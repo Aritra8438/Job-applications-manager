@@ -1,4 +1,6 @@
 # Job-applications-manager
+# Our website is live. Access it here:
+
 
 # Telegram Bot Documentation:
 Due to the [serverless function size](https://vercel.com/docs/concepts/limits/overview#serverless-function-size) limit, we couldn't add all the functionalities to the API.
@@ -12,14 +14,14 @@ If you want to run/contribute to the Telegram bot, please get an API token from 
 
 If you are interested in Telegram bots, please refer to the [documentation](https://core.telegram.org/bots/api).
 
-Also, don't forget to create a separate virtual environment to run the bot. The `requirements.txt` for the same will be available in `Telegram bot` folder
+Also, don't forget to create a separate virtual environment to run the bot. The `requirements.txt` for the same will be available in `Telegram bot` folder.
 
 
 # Local Development Setup:
 
 Open the terminal at the destination folder:
 
-```bash
+```console
 # Cloning the repository
 git clone https://github.com/Aritra8438/Job-applications-manager.git
 
@@ -53,12 +55,16 @@ DATABASES = {
 ```
 
 Once you completed these steps, our backend is ready to serve. Open the terminal in the current directory:
- ```bash
- cd Job-applications-manager
- python manage.py makemigrations
- python manage.py migrate auth
- python manage.py migrate --run-syncdb
- python manage.py runserver
+ ```console
+cd Job-applications-manager
+
+python manage.py makemigrations
+
+python manage.py migrate auth
+
+python manage.py migrate --run-syncdb
+
+python manage.py runserver
  ```
  Holla, you have run it on localhost:8000.
  
@@ -69,26 +75,26 @@ Hello contributors, here is the contribution guideline you should follow:
 - **First, create a fork of this repo. (Available at the top right corner of the repo)** 
 
 - Go to the forked repository and **Clone the fork of your repo to the destination folder**.
-```
+```console
 $ git clone https://github.com/YOUR_USERNAME/YOUR_FORK.git
 
 ```
 - Navigate to the Project repository
-```
+```console
 $ cd Job-applications-manager
 ```
 - Add Upstream to your clone
 
-```
+```console
 $ git remote -v
 > origin  https://github.com/YOUR_USERNAME/YOUR_FORK.git (fetch)
 > origin  https://github.com/YOUR_USERNAME/YOUR_FORK.git (push)
 ```
-```
+```console
 $ git remote add upstream https://github.com/Aritra8438/Job-applications-manager.git
 ```
 
-```
+```console
 $ git remote -v
 > origin    https://github.com/YOUR_USERNAME/YOUR_FORK.git (fetch)
 > origin    https://github.com/YOUR_USERNAME/YOUR_FORK.git (push)
@@ -97,14 +103,14 @@ $ git remote -v
 ```
 - Before making any changes, sync your origin with upstream 
 
-```
+```console
 $ git pull upstream main --rebase
 ``` 
 
 
 - Make some changes to the project. After that, open a new branch and commit the changes.
 
-```
+```console
 $ git checkout -b <new_branch>
 $ git add .
 $ git commit -m "Commit message"
@@ -115,7 +121,7 @@ $ git push origin <new branch>
 
 Thank you for your contribution.
 
-## API Documentation.
+## API Documentation:
 
 Most of the APIs are available in [this](https://documenter.getpostman.com/view/27795030/2s93z5A5J6) postman documentation.
 
@@ -125,3 +131,13 @@ Here is a screenshot of the same.
 
 <img width="946" alt="image" src="https://github.com/Aritra8438/Job-applications-manager/assets/64671908/76afcd82-e597-46b4-be57-ddc1e7189efd">
 
+## Unit Testing:
+Currently, the essential APIs are unit-tested using ```pytest```.
+If you are contributing to this repo, it's recommended that you run pytest before your pull request.
+
+Open the project folder and run:
+```console
+pytest
+```
+
+Currently, most of the tests are linked in cascade by ```@pytest.fixture```. If you are adding a lot of testing to this project, we recommend creating a ```conftest.py``` and declaring all fixtures there.
