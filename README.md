@@ -1,5 +1,17 @@
 # Job-applications-manager
 
+# Index <br>
+To quickly jump to a subsection, 
+
+* [Website](https://github.com/Aritra8438/Job-applications-manager/tree/main#website-the-website-is-live)             
+                
+* [Telegram Bot Documnetation](https://github.com/Aritra8438/Job-applications-manager/tree/main#website-the-website-is-live)                
+                
+* [Contribution Workflow](https://github.com/Aritra8438/Job-applications-manager/tree/main#website-the-website-is-live)                
+
+* [Contribution Workflow](https://github.com/Aritra8438/Job-applications-manager/tree/main#website-the-website-is-live)
+  
+* [Pytest](https://github.com/Aritra8438/Job-applications-manager/tree/main#website-the-website-is-live)
 
 # Website 
 <a href="https://job-application-manager.netlify.app/"><strong>Our website is live!</strong></a>
