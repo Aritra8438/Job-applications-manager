@@ -1,5 +1,22 @@
 # Job-applications-manager
+<p align="center">
+<img width="81" alt="image" src="https://github.com/Aritra8438/Job-applications-manager/assets/64671908/ed518437-31ac-43ca-a559-a8455938a5b2">
+<br>
+<a href="https://github.com/Aritra8438/Demo_E-commerce_Site/tree/master"><img src="https://img.shields.io/github/last-commit/Aritra8438/Job-applications-manager?style=for-the-badge&logo=git" alt="MIT" /></a>
+<a href="https://github.com/Aritra8438/Demo_E-commerce_Site/tree/master"><img src="https://img.shields.io/github/issues/Aritra8438/Job-applications-manager?style=for-the-badge&label=Issues" alt="MIT" /></a>
+<a href="https://github.com/Aritra8438/Demo_E-commerce_Site/tree/master"><img src="https://img.shields.io/github/issues-pr/Aritra8438/Job-applications-manager?style=for-the-badge&logo=github" alt="MIT" /></a>
+<a href="https://github.com/Aritra8438/Demo_E-commerce_Site/tree/master"><img src="https://img.shields.io/github/issues-pr-closed/Aritra8438/Job-applications-manager?style=for-the-badge&logo=github" alt="MIT" /></a>
+</p>
 
+<p align="center">
+  <br>
+  <a href="https://github.com/Aritra8438/Demo_E-commerce_Site/tree/master"><img src="https://img.shields.io/badge/LICENSE-MIT-green" alt="MIT" /></a>  
+  <a href="https://python.org"><img src="https://img.shields.io/badge/python->=3.9.x-green.svg"></a>
+  <a href="#">
+    <img src="https://badges.frapsoft.com/os/v1/open-source.png?v=103">
+  </a>
+</p>
+<hr>
 # Index 
 To quickly jump to a subsection, 
 
